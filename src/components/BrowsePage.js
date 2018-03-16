@@ -1,11 +1,25 @@
 // THE Main Page of the app, and the main file that holds the navigation system
 import React, { Component } from 'react';
 import {
+  Body,
+  Button,
+  Container,
+  Content,
+  Footer,
+  FooterTab,
+  Header,
+  Icon,
+  Left,
+  Right,
+  Text,
+  Title
+} from 'native-base';
+import {
   Platform,
   StyleSheet,
   Text,
   View,
-  FlatList
+  FlatList,
 } from 'react-native';
 
 import movieService from '../services/movie.service';
@@ -42,15 +56,31 @@ export default class BrowsePage extends Component {
         />);
       }
 
+      _renderItem = ({item}) => {
+        return (<Text style={Styles.item}>
+          {item.getTitle()} {item.getYearReleased()}
+        </Text>
+        );
+      }
+
    
 render(){
-return( 
+return(
+  <Container>
+  <Header>
+    <Left/>
+    <Body>
+      <Title>Header</Title>
+    </Body>
+    <Right />
+  </Header>
+</Container>
 <View style={Styles.container}>
     <Text style={Styles.title}>
-      The Incredible Movie List
+Movie database app
     </Text>
     {this.state.data != null ? this._renderMovies() : <Text>We're getting the app ready...</Text>}
-</View>   
+</View>  
 );
 }
 }

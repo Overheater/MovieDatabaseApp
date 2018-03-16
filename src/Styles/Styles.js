@@ -34,4 +34,9 @@ export default StyleSheet.create({
         backgroundColor:"#ffee58",
         alignItems:'center',
     },
+    item: {
+      textAlign: 'center',
+      color: '#333333',
+      marginBottom: 5,
+    },
 })

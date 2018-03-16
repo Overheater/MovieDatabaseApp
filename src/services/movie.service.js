@@ -8,12 +8,12 @@ let MovieService = class MovieService {
     
     getMovies() {
         return new Promise((resolve, reject) => {
-            fetch(apiService.getMovieList())
+            fetch(apiService.getPopMovieList())
             .then((response) => response.json())
             .then((responseJson) => {
                 let items = [];
-                responseJson.movies.forEach(element => {
-                    items.push(new Movie(element.title, element.yearReleased));
+                responseJson.movies.forEach(data => {
+                    items.push(new Movie(data.title, data.release_date));
                 });
                 resolve(items);
             })

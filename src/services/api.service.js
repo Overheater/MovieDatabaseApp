@@ -1,7 +1,7 @@
 let ApiService = class ApiService {
 	constructor() {
 		this.apiProtocol = 'https:';
-		this.apiHost = 'facebook.github.io/react-native';
+		this.apiHost = 'api.themoviedb.org';
 	}
 
 	/*
@@ -14,8 +14,8 @@ let ApiService = class ApiService {
 	/*
 	* API addresses
 	*/
-	getMovieList() {
-		return `${this.apiLocation}/movies.json`;
+	getPopMovieList(Pagenumb) {
+		return `${this.apiLocation}/3/movie/popular?api_key=af10a1cc2cde7834ccd716f3aa89f4b8&language=en-US&page=${Pagenumb}`;
 	}
 };
 
