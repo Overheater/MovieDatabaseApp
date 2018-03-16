@@ -6,12 +6,13 @@ import {
   Container,
   Content,
   Footer,
+  Card,
+  CardItem,
   FooterTab,
   Header,
   Icon,
   Left,
   Right,
-  Text,
   Title
 } from 'native-base';
 import {
@@ -21,12 +22,24 @@ import {
   View,
   FlatList,
 } from 'react-native';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import movieService from '../services/movie.service';
 import Styles from '../Styles/Styles'
-import  { StackNavigator } from 'react-navigation';
+import  { TabNavigator,StatusBar,navigationOptions } from 'react-navigation';
 import  SearchPage from './SearchPage';
+import { Genre } from '../models/Genre';
 export default class BrowsePage extends Component {
+  static navigationOptions = {
+    title: 'Genres',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  };
+
     constructor(props) {
         super(props);
     
@@ -35,11 +48,13 @@ export default class BrowsePage extends Component {
         }   
       }
     componentDidMount() {
-        this._getMovies(); 
+        this._getGenres(); 
+      
       }
 
-    _getMovies() {
-        movieService.getMovies()
+
+    _getGenres() {
+        movieService.getGenres()
         .then(results =>{
           this.setState({data: results});
         })
@@ -57,9 +72,18 @@ export default class BrowsePage extends Component {
       }
 
       _renderItem = ({item}) => {
-        return (<Text style={Styles.item}>
-          {item.getTitle()} {item.getYearReleased()}
-        </Text>
+        return (
+        <Card>
+        <CardItem 
+            button
+            onPress={()=>this.props.navigation.navigate('MovieSummary',{Genrename : item.getName(), Genre: item.getID()})}
+        >
+            <Text>{item.getName()}</Text>
+            <Right>
+                <Icon name="ios-arrow-forward" />
+            </Right>
+        </CardItem>
+    </Card>
         );
       }
 
@@ -67,20 +91,8 @@ export default class BrowsePage extends Component {
 render(){
 return(
   <Container>
-  <Header>
-    <Left/>
-    <Body>
-      <Title>Header</Title>
-    </Body>
-    <Right />
-  </Header>
+    {this.state.data != null ? this._renderMovies() : <Text >Sacrificing to the movie God...</Text>}
 </Container>
-<View style={Styles.container}>
-    <Text style={Styles.title}>
-Movie database app
-    </Text>
-    {this.state.data != null ? this._renderMovies() : <Text>We're getting the app ready...</Text>}
-</View>  
 );
 }
 }

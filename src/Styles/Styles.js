@@ -18,9 +18,18 @@ export default StyleSheet.create({
         backgroundColor: '#F5FCFF',
       },
       welcome: {
-        fontSize: 20,
+        fontSize: 22,
         textAlign: 'center',
-        margin: 10,
+        margin: 5,
+      },
+      textcenter:{
+        textAlign: 'center',
+
+      },
+      note: {
+        fontSize: 10,
+        textAlign: 'center',
+        margin: 3,
       },
       instructions: {
         textAlign: 'center',
